@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="style/style.css" rel="stylesheet" media="screen" />
+<title>Cheesr - Making cheese taste beta</title>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>Cheesr</h1>
+		</div>
+		<div id="content">
+			<h1>
+				Edit <span wicket:id="cheeseId"></span>
+			</h1>
+			<div wicket:id="feedback"></div>
+			<form wicket:id="form">
+				<fieldset>
+					<legend>Cheese data</legend>
+					<table>
+						<tr>
+							<td>Name</td>
+							<td><input type="text" wicket:id="name"></td>
+						</tr>
+						<tr>
+							<td>Description</td>
+							<td><textarea wicket:id="description" cols="60" rows="10"></textarea></td>
+						</tr>
+						<tr>
+							<td>Price</td>
+							<td><input type="number" wicket:id="price"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td><input type="submit" value="Save"></td>
+						</tr>
+					</table>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

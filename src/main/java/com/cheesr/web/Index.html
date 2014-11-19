@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="style/style.css" rel="stylesheet" media="screen" />
+<title>Cheesr - Making cheese taste beta</title>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>Cheesr</h1>
+		</div>
+		<div id="content">
+			<div id="main">
+				<h2 wicket:id="message"></h2>
+				<div wicket:id="cheese" class="cheese">
+					<h3 wicket:id="name">Gouda</h3>
+					<p wicket:id="description">Named after the Dutch town of Gouda,
+						just outside Rotterdam. It accounts for more than 60% of the
+						cheese produced in Holland and it has a very long history. Gouda
+						is a traditional, creamery, hard cheese. It is round with very
+						smooth, yellow, waxed rind. The flavor is sweet and fruity. As
+						time passes, the taste intensifies and becomes more complex.
+						Mature Gouda (18 months plus) is coated in black wax which
+						provides a stark contrast to the deep yellow interior. Gouda is
+						considered to be one of the world's great cheeses. It is both a
+						table cheese and a dessert cheese, excellent with fruit and wine.
+						Gouda is now made globally in a style similar to the creation of
+						Edam.</p>
+					<p>
+						€<span wicket:id="price">1.99</span> 
+						<a wicket:id="add" href="#">Add to cart</a>
+						<a wicket:id="edit" href="#">Edit</a>
+					</p>
+				</div>
+			</div>
+<div id="cart">
+	<div>
+		<h3>Your Selection</h3>
+		<table>
+			<tbody>
+				<tr wicket:id="item">
+					<td wicket:id="name">Gouda</td>
+					<td wicket:id="price">$1.99</td>
+					<td><a wicket:id="remove" href="#">remove</a></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr class="total">
+					<th>Total</th>
+					<td>€<span wicket:id="total"></span></td>
+					<td>&nbsp;</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<input wicket:id="checkout" type="button" value="Check out" />
+</div>
+		</div>
+	</div>
+</body>
+</html>

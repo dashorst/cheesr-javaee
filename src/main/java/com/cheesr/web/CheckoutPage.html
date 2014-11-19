@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="style/style.css" rel="stylesheet" media="screen" />
+<title>Cheesr - Making cheese taste beta</title>
+</head>
+<body>
+<div id="container">
+<div id="header"><h1>Cheesr - checkout</h1></div>
+<div id="content">
+<div id="main">
+	<div wicket:id="feedback"><ul><li>Name is required</li></ul></div>
+<form wicket:id="form">
+	<h3>Check out</h3>
+	<p>Please enter your billing address.</p>
+	<table>
+		<tr>
+			<th>Name</th>
+			<td><input wicket:id="name" type="text" /></td>
+		</tr>
+		<tr>
+			<th>Street</th>
+			<td><input wicket:id="street" type="text" /></td>
+		</tr>
+		<tr>
+			<th>Zipcode</th>
+			<td><input wicket:id="zipcode" type="text" /></td>
+		</tr>
+		<tr>
+			<th>City</th>
+			<td><input wicket:id="city" type="text" /></td>
+		</tr>
+		<tr>
+			<th>Country</th>
+			<td><input wicket:id="country" type="text" /></td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td>
+				<input type="button" value="Cancel" />
+				<input type="submit" value="Order!" />
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+<div id="cart">
+	<div>
+		<h3>Your Selection</h3>
+		<table>
+			<tbody>
+				<tr wicket:id="item" >
+					<td wicket:id="name">Gouda</td>
+					<td>€<span wicket:id="price"></span></td>
+					<td><a wicket:id="remove" href="#">remove</a></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr class="total">
+					<th>Total</th>
+					<td>€<span wicket:id="total"></span></td>
+					<td>&nbsp;</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+</div>
+</div>
+</body>
+</html>
