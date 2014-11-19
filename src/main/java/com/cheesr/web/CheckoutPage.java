@@ -29,9 +29,6 @@ public class CheckoutPage extends WebPage {
 	private OrderDao orders;
 
 	@Inject
-	private Conversation shopping;
-
-	@Inject
 	private Cart cart;
 
 	private Order order = new Order();
@@ -54,7 +51,6 @@ public class CheckoutPage extends WebPage {
 					order.getItems().add(item);
 				}
 				orders.save(order);
-				shopping.end();
 				setResponsePage(Index.class);
 			}
 		};

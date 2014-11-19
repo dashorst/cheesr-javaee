@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.SessionScoped;
 
 import com.cheesr.entities.Cheese;
 
-@ConversationScoped
+@SessionScoped
 public class Cart implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,6 +26,6 @@ public class Cart implements Serializable {
 	}
 
 	public double getTotal() {
-		return items.stream().mapToDouble(Cheese::getPrice).sum();
+		return 0; //X TODO
 	}
 }

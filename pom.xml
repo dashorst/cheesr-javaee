@@ -16,229 +16,425 @@
    limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>nl.topicus.onderwijs</groupId>
-		<artifactId>onderwijs-jee7-parent</artifactId>
-		<version>2012.2.99</version>
-		<relativePath/>
-	</parent>
-	<groupId>com.cheesr.web</groupId>
-	<artifactId>cheesr2</artifactId>
-	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
-		<!-- TODO project name  -->
-	<name>quickstart</name>
-	<description></description>
-	<!--
-		<organization>
-			<name>company name</name>
-			<url>company url</url>
-		</organization>
-	-->
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<wicket.version>6.18.0</wicket.version>
-		<arquillian.version>1.1.5.Final</arquillian.version>
-		<wtp.version>none</wtp.version>
-	</properties>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.jboss.spec</groupId>
-				<artifactId>jboss-javaee-7.0</artifactId>
-				<version>1.0.1.Final</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jboss.arquillian</groupId>
-				<artifactId>arquillian-bom</artifactId>
-				<version>${arquillian.version}</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-			<dependency>
-				<groupId>xerces</groupId>
-				<artifactId>xercesImpl</artifactId>
-				<version>2.11.0</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	<dependencies>
-		<!--  EJB DEPENDENCIES -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.ejb</groupId>
-			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-javaee-inject</artifactId>
-			<version>6.17.0</version>
-		</dependency>
-		<!--  CDI DEPENDENCIES -->
-		<dependency>
-			<groupId>javax.enterprise</groupId>
-			<artifactId>cdi-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-cdi-1.1</artifactId>
-		</dependency>
-		<!--  JPA DEPENDENCIES -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!--  BEAN VALIDATION DEPENDENCIES -->
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-bean-validation</artifactId>
-		</dependency>
-		<!-- ARQUILLIAN DEPENDENCY FOR TESTING -->
-		<dependency>
-			<groupId>org.jboss.arquillian.junit</groupId>
-			<artifactId>arquillian-junit-container</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.shrinkwrap.descriptors</groupId>
-			<artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.shrinkwrap.resolver</groupId>
-			<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!--  WICKET DEPENDENCIES -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-core</artifactId>
-		</dependency>
-		<!-- LOGGING DEPENDENCIES - LOG4J -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		<!--  JUNIT DEPENDENCY FOR TESTING -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-	<build>
-		<resources>
-			<resource>
-				<filtering>false</filtering>
-				<directory>src/main/resources</directory>
-			</resource>
-			<resource>
-				<filtering>false</filtering>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**</include>
-				</includes>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</resource>
-		</resources>
-		<testResources>
-			<testResource>
-				<filtering>false</filtering>
-				<directory>src/test/resources</directory>
-			</testResource>
-			<testResource>
-				<filtering>false</filtering>
-				<directory>src/test/java</directory>
-				<includes>
-					<include>**</include>
-				</includes>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</testResource>
-		</testResources>
-		<plugins>
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<wtpversion>${wtp.version}</wtpversion>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<profiles>
-		<profile>
-			<id>wildfly-managed</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>org.wildfly.arquillian</groupId>
-					<artifactId>wildfly-arquillian-container-managed</artifactId>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>wildfly-remote</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.wildfly.arquillian</groupId>
-					<artifactId>wildfly-arquillian-container-remote</artifactId>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
+    <groupId>com.cheesr.web</groupId>
+    <artifactId>cheesr2</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <!-- TODO project name  -->
+    <name>quickstart</name>
+    <!--
+        <organization>
+            <name>company name</name>
+            <url>company url</url>
+        </organization>
+    -->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <wicket.version>6.18.0</wicket.version>
+        <arquillian.version>1.1.5.Final</arquillian.version>
+        <wtp.version>none</wtp.version>
+        <slf4j.version>1.7.4</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <deltaspike.version>1.1.0</deltaspike.version>
+        <interdyn.version>1.0-SNAPSHOT</interdyn.version>
+
+        <tomee.version>1.7.1</tomee.version>
+        <tomee.mavenplugin.version>${tomee.version}</tomee.mavenplugin.version>
+        <projectstage>Development</projectstage>
+
+        <tomee.additional.args></tomee.additional.args>
+
+        <h2.version>1.4.182</h2.version>
+
+
+        <database.base.port>9090</database.base.port>
+        <database.base.path>/tmp/h2</database.base.path>
+        <database.driver.name>org.h2.Driver</database.driver.name>
+        <database.connection.url>jdbc:h2:file:${database.base.path}/cheesr;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=${database.base.port}</database.connection.url>
+
+        <database.user>sa</database.user>
+        <database.password />
+
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${arquillian.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>xerces</groupId>
+                <artifactId>xercesImpl</artifactId>
+                <version>2.11.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-api</artifactId>
+            <version>${deltaspike.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-impl</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--  EJB DEPENDENCIES -->
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-ejb_3.1_spec</artifactId>
+            <version>1.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wicketstuff</groupId>
+            <artifactId>wicketstuff-javaee-inject</artifactId>
+            <version>6.17.0</version>
+        </dependency>
+        <!--  CDI DEPENDENCIES -->
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jcdi_1.0_spec</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-cdi</artifactId>
+            <version>${wicket.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_2.0_spec</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--  BEAN VALIDATION DEPENDENCIES -->
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-validation_1.0_spec</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-bean-validation</artifactId>
+            <version>${wicket.version}</version>
+        </dependency>
+        <!-- ARQUILLIAN DEPENDENCY FOR TESTING -->
+        <!--
+                <dependency>
+                    <groupId>org.jboss.arquillian.junit</groupId>
+                    <artifactId>arquillian-junit-container</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                    <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                    <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+                    <scope>test</scope>
+                </dependency>
+        -->
+        <!--  WICKET DEPENDENCIES -->
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jta_1.1_spec</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-core</artifactId>
+            <version>${wicket.version}</version>
+        </dependency>
+        <!-- LOGGING DEPENDENCIES - LOG4J -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <!--  JUNIT DEPENDENCY FOR TESTING -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <finalName>cheesr</finalName>
+
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <filtering>false</filtering>
+                <directory>src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <filtering>false</filtering>
+                <directory>src/test/java</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <wtpversion>${wtp.version}</wtpversion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <!--
+        <profiles>
+            <profile>
+                <id>wildfly-managed</id>
+                <activation>
+                    <activeByDefault>true</activeByDefault>
+                </activation>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.wildfly.arquillian</groupId>
+                        <artifactId>wildfly-arquillian-container-managed</artifactId>
+                        <scope>test</scope>
+                    </dependency>
+                </dependencies>
+            </profile>
+            <profile>
+                <id>wildfly-remote</id>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.wildfly.arquillian</groupId>
+                        <artifactId>wildfly-arquillian-container-remote</artifactId>
+                        <scope>test</scope>
+                    </dependency>
+                </dependencies>
+            </profile>
+        </profiles>
+    -->
+    <profiles>
+        <profile>
+            <id>tomee</id>
+            <properties>
+                <tomee-plugin.catalinaBaseDir>apache-tomee</tomee-plugin.catalinaBaseDir>
+            </properties>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.6</version>
+                        <executions>
+                            <execution>
+                                <id>copy-tomee-conf</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- has to be configured as tomee.conf.dir -->
+                                    <outputDirectory>${project.build.directory}/tomee/</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/main/tomee/</directory>
+                                            <includes>
+                                                <include>**/*.xml</include>
+                                                <include>**/*.properties</include>
+                                            </includes>
+                                            <!-- filter to correctly set the database connection properties in tomee.xml -->
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                    <overwrite>true</overwrite>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.openejb.maven</groupId>
+                        <artifactId>tomee-maven-plugin</artifactId>
+                        <version>${tomee.mavenplugin.version}</version>
+                        <configuration>
+                            <tomeeVersion>${tomee.version}</tomeeVersion>
+                            <tomeeClassifier>webprofile</tomeeClassifier>
+                            <config>${project.build.directory}/tomee/conf</config>
+                            <deployOpenEjbApplication>true</deployOpenEjbApplication>
+                            <synchronization>
+                                <extensions>
+                                    <extension>.class</extension>
+                                    <extension>.properties</extension>
+                                    <!-- monitor css files for daniel valda -->
+                                    <extension>.css</extension>
+                                    <!-- if you want to update each time you build with mvn compile -->
+                                </extensions>
+                                <updateInterval>2</updateInterval>
+                            </synchronization>
+
+                            <catalinaBase>${project.build.directory}/${tomee-plugin.catalinaBaseDir}</catalinaBase>
+
+                            <!-- removed the .war extension from the "warFile" property, so we can use exploded archives -->
+                            <warFile>${project.build.directory}/${project.build.finalName}</warFile>
+                            <!-- path that is used by tomEE in the tomee:deploy and tomee:undeploy goal -->
+                            <path>${project.build.directory}/apache-tomee/webapps${project.build.finalName}</path>
+                            <!-- memory settings for tomEE; increased PermGen from default 64m to 512m, should allow for more
+                            redeploys without PermGenExceptions -->
+                            <args>-Dorg.apache.deltaspike.ProjectStage=${projectstage} -Dfaces.PROJECT_STAGE=${projectstage} -Dopenejb.log.factory=log4j -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx1024m -XX:NewSize=512m -XX:MaxNewSize=384m -XX:PermSize=384m -XX:MaxPermSize=512m -XX:+DisableExplicitGC ${tomee.additional.args}
+                            </args>
+                            <libs>
+                                <lib>remove:slf4j</lib>
+                                <lib>org.slf4j:slf4j-api:${slf4j.version}</lib>
+                                <lib>org.slf4j:slf4j-log4j12:${slf4j.version}</lib>
+                                <lib>org.slf4j:jul-to-slf4j:${slf4j.version}</lib>
+                                <lib>com.h2database:h2:${h2.version}</lib>
+                                <lib>log4j:log4j:${log4j.version}</lib>
+                            </libs>
+
+                            <classpaths>
+                                <classpath>${project.build.directory}/${tomee-plugin.catalinaBaseDir}/lib/slf4j-api-${slf4j.version}.jar</classpath>
+                                <classpath>${project.build.directory}/${tomee-plugin.catalinaBaseDir}/lib/jul-to-slf4j-${slf4j.version}.jar</classpath>
+                                <classpath>${project.build.directory}/${tomee-plugin.catalinaBaseDir}/lib/slf4j-log4j12-${slf4j.version}.jar</classpath>
+                                <classpath>${project.build.directory}/${tomee-plugin.catalinaBaseDir}/lib/log4j-${log4j.version}.jar</classpath>
+                                <classpath>${project.build.directory}/${tomee-plugin.catalinaBaseDir}/lib/log4j.xml</classpath>
+                            </classpaths>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.openejb</groupId>
+                                <artifactId>apache-tomee</artifactId>
+                                <version>${tomee.version}</version>
+                                <classifier>webprofile</classifier>
+                                <type>zip</type>
+                                <!-- we have to set this to runtime, else it does not work -->
+                                <scope>runtime</scope>
+                            </dependency>
+
+                            <dependency>
+                                <groupId>com.h2database</groupId>
+                                <artifactId>h2</artifactId>
+                                <version>${h2.version}</version>
+                                <scope>runtime</scope>
+                            </dependency>
+
+                            <!--X
+                                                        <dependency>
+                                                            <groupId>mysql</groupId>
+                                                            <artifactId>mysql-connector-java</artifactId>
+                                                            <version>${mysql-connector.version}</version>
+                                                            <scope>runtime</scope>
+                                                        </dependency>
+                                                        <dependency>
+                                                            <groupId>org.slf4j</groupId>
+                                                            <artifactId>jul-to-slf4j</artifactId>
+                                                            <version>${slf4j.version}</version>
+                                                        </dependency>
+                            -->
+
+                        </dependencies>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>invomon</id>
+            <properties>
+                <interdyn.version>1.0-SNAPSHOT</interdyn.version>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>at.struct.devtools.cdi.invomon</groupId>
+                    <artifactId>invomon</artifactId>
+                    <version>${interdyn.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>at.struct.devtools.cdi.interdyn</groupId>
+                    <artifactId>interdyn</artifactId>
+                    <version>${interdyn.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
 </project>

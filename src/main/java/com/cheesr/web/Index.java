@@ -3,7 +3,6 @@ package com.cheesr.web;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 
 import org.apache.wicket.markup.html.WebPage;
@@ -25,17 +24,12 @@ public class Index extends WebPage
 	private CheeseDao cheeseDao;
 
 	@Inject
-	private Conversation shopping;
-
-	@Inject
 	private Cart cart;
 
 	public Index()
 	{
 		add(new Label("message", new MessageModel()));
 
-		if (shopping.isTransient())
-			shopping.begin();
 
 		List<Cheese> cheeses = cheeseDao.getCheeses();
 
