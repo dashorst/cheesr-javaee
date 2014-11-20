@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 
+import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +16,9 @@ import org.junit.Test;
 import com.cheesr.dao.CheeseDao;
 import com.cheesr.domain.Cart;
 import com.cheesr.entities.Cheese;
+import org.junit.runner.RunWith;
 
-
+@RunWith(CdiTestRunner.class) //starts container once and one session + request per test-method
 public class TestIndex
 {
 
@@ -36,9 +38,6 @@ public class TestIndex
 
 		tester.assertRenderedPage(Index.class);
 	}
-
-	@Inject
-	private Conversation conversation;
 
 	@EJB
 	private CheeseDao cheeses;

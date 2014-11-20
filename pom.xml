@@ -48,11 +48,17 @@
         <wtp.version>none</wtp.version>
         <slf4j.version>1.7.4</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
-        <deltaspike.version>1.1.0</deltaspike.version>
+        <deltaspike.version>1.1.1-SNAPSHOT</deltaspike.version>
         <interdyn.version>1.0-SNAPSHOT</interdyn.version>
 
         <tomee.version>1.7.1</tomee.version>
+        <openejb.version>4.7.1</openejb.version>
         <tomee.mavenplugin.version>${tomee.version}</tomee.mavenplugin.version>
+
+        <!-- for now, improved conversation support in servlets -->
+        <owb.version>1.2.7-SNAPSHOT</owb.version>
+
+
         <projectstage>Development</projectstage>
 
         <tomee.additional.args></tomee.additional.args>
@@ -98,6 +104,50 @@
             <version>${deltaspike.version}</version>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- for unit testing -->
+        <dependency>
+            <groupId>org.apache.deltaspike.cdictrl</groupId>
+            <artifactId>deltaspike-cdictrl-api</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.cdictrl</groupId>
+            <artifactId>deltaspike-cdictrl-openejb</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>openejb-core</artifactId>
+            <version>${openejb.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openwebbeans</groupId>
+            <artifactId>openwebbeans-impl</artifactId>
+            <version>${owb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-test-control-module-api</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-test-control-module-impl</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <!--  EJB DEPENDENCIES -->
         <dependency>
@@ -245,6 +295,7 @@
                 <inherited>true</inherited>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -256,40 +307,45 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
                 <configuration>
                     <downloadSources>true</downloadSources>
                     <wtpversion>${wtp.version}</wtpversion>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-test-conf</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <!-- used to apply the pom configured settings for the test datasources -->
+                            <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/test/resources</directory>
+                                    <includes>
+                                        <include>**/*.xml</include>
+                                        <include>**/*.properties</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
-    <!--
-        <profiles>
-            <profile>
-                <id>wildfly-managed</id>
-                <activation>
-                    <activeByDefault>true</activeByDefault>
-                </activation>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.wildfly.arquillian</groupId>
-                        <artifactId>wildfly-arquillian-container-managed</artifactId>
-                        <scope>test</scope>
-                    </dependency>
-                </dependencies>
-            </profile>
-            <profile>
-                <id>wildfly-remote</id>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.wildfly.arquillian</groupId>
-                        <artifactId>wildfly-arquillian-container-remote</artifactId>
-                        <scope>test</scope>
-                    </dependency>
-                </dependencies>
-            </profile>
-        </profiles>
-    -->
+
     <profiles>
         <profile>
             <id>tomee</id>
